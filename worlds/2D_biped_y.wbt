@@ -1,0 +1,610 @@
+#VRML_SIM R2019a utf8
+WorldInfo {
+  basicTimeStep 4
+  contactProperties [
+    ContactProperties {
+      coulombFriction [
+        -1
+      ]
+      softCFM 0.002
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.001702815953529541 -0.9935506711533233 -0.11337620680111576 3.1419518083581783
+  position -0.035489197362274585 1.6990310760284928 -4.598626567359593
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  size 100 100
+  tileSize 1 1
+}
+Robot {
+  translation 0 1.089 0
+  children [
+    SliderJoint {
+      jointParameters DEF y JointParameters {
+        axis 0 1 0
+      }
+      endPoint Solid {
+        children [
+          DEF y Shape {
+            appearance Appearance {
+              material Material {
+              }
+            }
+            geometry Sphere {
+              radius 0.01
+            }
+          }
+          SliderJoint {
+            jointParameters DEF z JointParameters {
+              axis 1 0 0
+            }
+            endPoint Solid {
+              children [
+                DEF z Shape {
+                  appearance Appearance {
+                    material Material {
+                    }
+                  }
+                  geometry Sphere {
+                    radius 0.01
+                  }
+                }
+                HingeJoint {
+                  jointParameters DEF x HingeJointParameters {
+                    axis 0 0 1
+                  }
+                  endPoint Solid {
+                    rotation 1 0 0 0
+                    children [
+                      DEF body Group {
+                        children [
+                          Transform {
+                            children [
+                              Shape {
+                                appearance Appearance {
+                                  material Material {
+                                    diffuseColor 0 0.3333333333333333 1
+                                  }
+                                }
+                                geometry Box {
+                                  size 0.4 0.3 0.2
+                                }
+                              }
+                            ]
+                          }
+                          Transform {
+                            translation 0 -0.225 0
+                            children [
+                              Shape {
+                                appearance Appearance {
+                                  material Material {
+                                    diffuseColor 0 0.3333333333333333 1
+                                  }
+                                }
+                                geometry Box {
+                                  size 0.2 0.15 0.2
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                      DEF r_roll HingeJoint {
+                        jointParameters HingeJointParameters {
+                          position 0.2
+                          axis 0 0 -1
+                          anchor 0.1 -0.3 0
+                        }
+                        device [
+                          PositionSensor {
+                            name "X_r_roll"
+                          }
+                          RotationalMotor {
+                            name "R_roll_m"
+                            maxTorque 1000
+                          }
+                        ]
+                        endPoint Solid {
+                          translation 0.1 -0.3 0
+                          rotation 0 0 1 1.3707996938995741
+                          children [
+                            Solid {
+                              children [
+                                DEF rrollLink Transform {
+                                  translation 0 -0.05 0
+                                  rotation 0 0 1 0
+                                  children [
+                                    Shape {
+                                      appearance Appearance {
+                                        material Material {
+                                        }
+                                      }
+                                      geometry Cylinder {
+                                        height 0.1
+                                        radius 0.009999999999999998
+                                        subdivision 10
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                              name "solid(1)"
+                              boundingObject USE rrollLink
+                              physics Physics {
+                                density -1
+                                mass 0.1
+                              }
+                            }
+                            DEF rrollJoint Transform {
+                              rotation 1 0 0 1.5708003061004252
+                              children [
+                                Shape {
+                                  appearance Appearance {
+                                    material Material {
+                                    }
+                                  }
+                                  geometry Cylinder {
+                                    height 0.05
+                                    radius 0.019999999999999997
+                                    subdivision 10
+                                  }
+                                }
+                              ]
+                            }
+                            DEF r_pitch HingeJoint {
+                              jointParameters HingeJointParameters {
+                                position 0.676131
+                                axis 0 1 0
+                                anchor 0 -0.1 0
+                              }
+                              device [
+                                PositionSensor {
+                                  name "X_r_thigh"
+                                }
+                                RotationalMotor {
+                                  name "R_thigh_m"
+                                  maxTorque 1000
+                                }
+                              ]
+                              endPoint Solid {
+                                translation 0 -0.1 0
+                                rotation 0 1 0 0.6761310000000001
+                                children [
+                                  DEF r_pitch_thigh Group {
+                                    children [
+                                      Transform {
+                                        children [
+                                          Shape {
+                                            appearance Appearance {
+                                              material Material {
+                                              }
+                                            }
+                                            geometry Cylinder {
+                                              height 0.05
+                                              radius 0.019999999999999997
+                                              subdivision 10
+                                            }
+                                          }
+                                        ]
+                                      }
+                                      Transform {
+                                        translation -0.25 0 0
+                                        rotation 0 0 1 -1.5707996938995747
+                                        children [
+                                          Shape {
+                                            appearance Appearance {
+                                              material Material {
+                                              }
+                                            }
+                                            geometry Cylinder {
+                                              height 0.5
+                                              radius 0.020000000000000004
+                                              subdivision 10
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                  DEF r_knee HingeJoint {
+                                    jointParameters HingeJointParameters {
+                                      position -1.35226
+                                      axis 0 1 0
+                                      anchor -0.5 0 0
+                                    }
+                                    device [
+                                      PositionSensor {
+                                        name "X_r_knee"
+                                      }
+                                      RotationalMotor {
+                                        name "R_knee_m"
+                                        maxTorque 1000
+                                      }
+                                    ]
+                                    endPoint Solid {
+                                      translation -0.5 0 0
+                                      rotation 0 -1 0 1.35226
+                                      children [
+                                        DEF r_knee_shin Group {
+                                          children [
+                                            Transform {
+                                              children [
+                                                Shape {
+                                                  appearance Appearance {
+                                                    material Material {
+                                                    }
+                                                  }
+                                                  geometry Cylinder {
+                                                    height 0.05
+                                                    radius 0.019999999999999997
+                                                    subdivision 10
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                            Transform {
+                                              translation -0.24 0 0
+                                              rotation 0 0 1 -1.5707996938995747
+                                              children [
+                                                Shape {
+                                                  appearance Appearance {
+                                                    material Material {
+                                                    }
+                                                  }
+                                                  geometry Cylinder {
+                                                    height 0.48
+                                                    radius 0.020000000000000004
+                                                    subdivision 10
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                        DEF r_foot TouchSensor {
+                                          translation -0.48 0 0
+                                          rotation 0 0 1 -1.5708003061004252
+                                          children [
+                                            DEF r_foot Shape {
+                                              appearance Appearance {
+                                                material Material {
+                                                }
+                                              }
+                                              geometry Sphere {
+                                                radius 0.020000000000000004
+                                                subdivision 3
+                                              }
+                                            }
+                                          ]
+                                          name "R_foot"
+                                          boundingObject USE r_foot
+                                          physics Physics {
+                                            density -1
+                                            mass 0.1
+                                            centerOfMass [
+                                              0 0 0
+                                            ]
+                                          }
+                                          type "force-3d"
+                                          lookupTable [
+                                            -1000 -1000 0
+                                            5000 5000 0
+                                          ]
+                                        }
+                                      ]
+                                      boundingObject USE r_knee_shin
+                                      physics Physics {
+                                        density -1
+                                        mass 1.5
+                                        centerOfMass [
+                                          -0.24 0 0
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                                boundingObject USE r_pitch_thigh
+                                physics Physics {
+                                  density -1
+                                  mass 1.5
+                                  centerOfMass [
+                                    -0.25 0 0
+                                  ]
+                                }
+                              }
+                            }
+                          ]
+                          boundingObject USE rrollJoint
+                          physics Physics {
+                            density -1
+                            mass 20.15
+                            centerOfMass [
+                              0 0 0
+                            ]
+                          }
+                        }
+                      }
+                      DEF l_roll HingeJoint {
+                        jointParameters HingeJointParameters {
+                          position -0.2
+                          axis 0 0 -1
+                          anchor -0.1 -0.3 0
+                        }
+                        device [
+                          RotationalMotor {
+                            name "L_roll_m"
+                            maxTorque 1000
+                          }
+                          PositionSensor {
+                            name "X_l_roll"
+                          }
+                        ]
+                        endPoint Solid {
+                          translation -0.1 -0.3 0
+                          rotation 0 0 -1 1.3708003061004252
+                          children [
+                            DEF lrollJoint Transform {
+                              rotation 1 0 0 1.5708003061004252
+                              children [
+                                Shape {
+                                  appearance Appearance {
+                                    material Material {
+                                    }
+                                  }
+                                  geometry Cylinder {
+                                    height 0.05
+                                    radius 0.019999999999999997
+                                    subdivision 10
+                                  }
+                                }
+                              ]
+                            }
+                            Solid {
+                              children [
+                                DEF lrollLink Transform {
+                                  translation 0 -0.05 0
+                                  rotation 0 0 1 0
+                                  children [
+                                    Shape {
+                                      appearance Appearance {
+                                        material Material {
+                                        }
+                                      }
+                                      geometry Cylinder {
+                                        height 0.1
+                                        radius 0.009999999999999998
+                                        subdivision 10
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                              name "solid(1)"
+                              boundingObject USE lrollLink
+                              physics Physics {
+                                density -1
+                                mass 0.1
+                                centerOfMass [
+                                  0 0 0
+                                ]
+                              }
+                            }
+                            DEF l_pitch HingeJoint {
+                              jointParameters HingeJointParameters {
+                                position 0.676131
+                                axis 0 -1 0
+                                anchor 0 -0.1 0
+                              }
+                              device [
+                                RotationalMotor {
+                                  name "L_thigh_m"
+                                  maxTorque 1000
+                                }
+                                PositionSensor {
+                                  name "X_l_thigh"
+                                }
+                              ]
+                              endPoint Solid {
+                                translation 0 -0.1 0
+                                rotation 0 -1 0 0.6761310000000001
+                                children [
+                                  DEF l_pitch_thigh Group {
+                                    children [
+                                      Transform {
+                                        children [
+                                          Shape {
+                                            appearance Appearance {
+                                              material Material {
+                                              }
+                                            }
+                                            geometry Cylinder {
+                                              height 0.05
+                                              radius 0.019999999999999997
+                                              subdivision 10
+                                            }
+                                          }
+                                        ]
+                                      }
+                                      Transform {
+                                        translation 0.25 0 0
+                                        rotation 0 0 1 1.5707996938995747
+                                        children [
+                                          Shape {
+                                            appearance Appearance {
+                                              material Material {
+                                              }
+                                            }
+                                            geometry Cylinder {
+                                              height 0.5
+                                              radius 0.019999999999999997
+                                              subdivision 10
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                  DEF l_knee HingeJoint {
+                                    jointParameters HingeJointParameters {
+                                      position -1.35226
+                                      axis 0 -1 0
+                                      anchor 0.5 0 0
+                                    }
+                                    device [
+                                      RotationalMotor {
+                                        name "L_knee_m"
+                                        maxTorque 1000
+                                      }
+                                      PositionSensor {
+                                        name "X_l_knee"
+                                      }
+                                    ]
+                                    endPoint Solid {
+                                      translation 0.5 0 0
+                                      rotation 0 1 0 1.35226
+                                      children [
+                                        DEF l_knee_shin Group {
+                                          children [
+                                            Transform {
+                                              children [
+                                                Shape {
+                                                  appearance Appearance {
+                                                    material Material {
+                                                    }
+                                                  }
+                                                  geometry Cylinder {
+                                                    height 0.05
+                                                    radius 0.019999999999999997
+                                                    subdivision 10
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                            Transform {
+                                              translation 0.24 0 0
+                                              rotation 0 0 1 1.5707996938995747
+                                              children [
+                                                Shape {
+                                                  appearance Appearance {
+                                                    material Material {
+                                                    }
+                                                  }
+                                                  geometry Cylinder {
+                                                    height 0.48
+                                                    radius 0.02
+                                                    subdivision 10
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                        TouchSensor {
+                                          translation 0.48 0 0
+                                          rotation 0 0 1 1.5708003061004252
+                                          children [
+                                            DEF r_foot Shape {
+                                              appearance Appearance {
+                                                material Material {
+                                                }
+                                              }
+                                              geometry Sphere {
+                                                radius 0.020000000000000004
+                                                subdivision 3
+                                              }
+                                            }
+                                          ]
+                                          name "L_foot"
+                                          boundingObject USE r_foot
+                                          physics Physics {
+                                            density -1
+                                            mass 0.1
+                                            centerOfMass [
+                                              0 0 0
+                                            ]
+                                          }
+                                          type "force-3d"
+                                          lookupTable [
+                                            -1000 -1000 0
+                                            5000 5000 0
+                                          ]
+                                        }
+                                      ]
+                                      boundingObject USE l_knee_shin
+                                      physics Physics {
+                                        density -1
+                                        mass 1.5
+                                        centerOfMass [
+                                          0.24 0 0
+                                        ]
+                                      }
+                                    }
+                                  }
+                                ]
+                                boundingObject USE l_pitch_thigh
+                                physics Physics {
+                                  density -1
+                                  mass 1.5
+                                  centerOfMass [
+                                    0.25 0 0
+                                  ]
+                                }
+                              }
+                            }
+                          ]
+                          name "solid(1)"
+                          boundingObject USE lrollJoint
+                          physics Physics {
+                            density -1
+                            mass 20.15
+                            centerOfMass [
+                              0 0 0
+                            ]
+                          }
+                        }
+                      }
+                      InertialUnit {
+                        name "IMU"
+                      }
+                      GPS {
+                        translation 0 -0.3 0
+                        name "GPS"
+                      }
+                    ]
+                    boundingObject USE body
+                    physics Physics {
+                      density -1
+                      mass 22.2
+                      centerOfMass [
+                        0 -0.30000000000000004 0
+                      ]
+                    }
+                  }
+                }
+              ]
+              name "solid(2)"
+              boundingObject USE z
+              physics Physics {
+                density -1
+                mass 0.01
+              }
+            }
+          }
+        ]
+        name "solid(2)"
+        boundingObject USE z
+        physics Physics {
+          density -1
+          mass 0.01
+        }
+      }
+    }
+  ]
+  controller "3D_controller"
+}
